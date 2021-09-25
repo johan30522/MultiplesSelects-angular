@@ -1,0 +1,56 @@
+<h1>Selectores anidados</h1>
+<hr>
+
+<form [formGroup]="miForm">
+
+
+    <div class="row mb-3">
+        <div class="col">
+            <!---region select-->
+            <label class="form-label" for="continente">Continente:</label>
+            <select class="form-control" name="continente" id="continente" formControlName="region">
+                <option value="">---Seleccione el continente---</option>
+                <option *ngFor="let reg  of regiones" [value]="reg|lowercase">{{reg}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3" *ngIf="paises.length!==0">
+        <div class="col">
+            <!--Paise Select-->
+            <label class="form-label" for="pais">Pais:</label>
+            <select class="form-control" name="pais" id="pais" formControlName="pais">
+                <option value="">---Seleccione el pais---</option>
+                <option *ngFor="let pais  of paises" [value]="pais.alpha3Code">{{pais.name}}</option>
+            </select>
+        </div>
+    </div>
+
+    <!--Frontesras select-->
+    <div class="row mb-3" *ngIf="fronteras.length!==0">
+        <div class="col">
+            <label class="form-label" for="pais">Fronteras:</label>
+            <select class="form-control" name="forntera" id="forntera" formControlName="frontera">
+                <option value="">---Seleccione la frontera---</option>
+                <option *ngFor="let frontera  of fronteras" [value]="frontera.alpha3Code">{{frontera.name}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="cargando">
+        <div class="col">
+            <div class="alert alert-primary">
+                Cargando...
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary float-end" (click)="seleccionar()">Seleccionar</button>
+        </div>
+    </div>
+</form>
+
+
+<h3>Formulario</h3>
+<pre>Valid: {{miForm.valid}}</pre>
+<pre>Value: {{miForm.value|json}}</pre>
